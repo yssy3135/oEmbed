@@ -23,7 +23,11 @@ public class oembed {
     private static final String GET_URL = "https://oembed.com/providers.json";
     private static ArrayList<String> providerList = null;
 
-
+    /**
+     * provider주소에 접근하여
+     * provider url 리스트를 생성
+     * @throws IOException
+     */
     public void getProvider() throws IOException {
         providerList = new ArrayList<>();
 
@@ -50,7 +54,11 @@ public class oembed {
         return ;
     }
 
-
+    /**
+     * 입력된 url 에서 비교할 주소를 뽑는다.
+     * @param url
+     * @return
+     */
     public static String getName(String url){
 
         //http://가 붙어있을 경우
@@ -64,7 +72,13 @@ public class oembed {
     }
 
 
-
+    /**
+     * provider 주소와 요청된 url주소를 합해서
+     * oEmbed 정보 요청 url주소 생성
+     * @param url
+     * @return
+     * @throws IOException
+     */
     public String makeRequestURL(String url) throws IOException {
         String name = getName(url);
         getProvider();
@@ -87,7 +101,13 @@ public class oembed {
         return reqURL;
     }
 
-
+    /**
+     * 만들어진 oEmbed 요청url을 통해
+     * oEmbed 정보를 가져와 반환할 정보 API 세팅
+     * @param url
+     * @return
+     * @throws IOException
+     */
     public Map getOembedInfo(String url) throws IOException {
         String reqURL = makeRequestURL(url);
 
